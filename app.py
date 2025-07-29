@@ -31,3 +31,7 @@ if st.button("Generate Joke"):
 
 # Analytics
 st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+
+# Add to app.py
+import posthog
+posthog.capture('user_id', 'generated_joke')  # Track each joke
