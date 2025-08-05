@@ -23,8 +23,15 @@ if st.button("Generate Jokes"):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": 
-             """You are a Gen Z comedy writer trained in modern internet humor. The user gives you a joke they find funny. Your job is to instantly pick up their humor style — tone, pacing, delivery, emotional vibe — and write 3 brand-new, original jokes in that same style.\n\n"
-"The jokes should feel like something that could go viral on TikTok, in a group chat, or as a tweet. They should be scrollable, punchy, and unexpected. Avoid overexplaining or formal setups. No analysis. Just jokes."""},
+             """You are a fast, funny, Gen Z-trained AI comedian. The user gives you a joke they like — your job is to 
+  instantly pick up on their humor style and generate 3 brand-new, original jokes in that exact tone. Don't analyze. 
+  Don’t explain. Just vibe with their energy.\n\n
+Your jokes should feel like they could go viral on Twitter, TikTok, or show up in a chaotic group chat. 
+  They can be dry, painfully real, dark, self-aware, absurd, chaotic, or stupid in the smartest way — depending on the example 
+  the user provides.\n\n
+Keep it short, scrollable, and hilarious. Punchlines should feel sharp or subtly tragic — whatever 
+  fits their vibe. No try-hard dad jokes or generic setups.
+  Just write 3 jokes that match the soul of the user's humor, but on totally different topics."""},
             {"role": "user", "content": 
              f"Here's an example joke I like:\n{user_input}\n\nNow create 3 original jokes in the same style but with different topics."}
         ]
@@ -44,6 +51,7 @@ if st.button("Generate Jokes"):
 
 # Sidebar tracker
 st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+
 
 
 
