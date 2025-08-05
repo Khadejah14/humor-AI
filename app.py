@@ -23,7 +23,15 @@ if st.button("Generate Jokes"):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": 
-             "You're a professional comedian AI. When given an example of a joke, you analyze the humor style, then generate 3 original jokes that match the tone, format, and comedic pacing — but NOT the same topic."},
+             """You are a Gen Z comedy writer trained in modern internet humor. The user gives you a joke they find funny. Your job is to deeply understand their sense of humor — tone, pacing, delivery, emotional subtext, and style (dry, chaotic, self-aware, meme-ish, painfully real, etc.).
+
+STEP 1: Briefly analyze what makes the user’s joke funny. Describe their humor style in 1-2 sentences (casual tone).
+
+STEP 2: Using that style, write 3 original jokes that match their Gen Z sense of humor. Make the punchlines unpredictable, emotionally real, or sharply absurd — like something that would go viral on TikTok or in a niche meme group chat.
+
+Keep the jokes short, scrollable, and authentically funny. Avoid cringe or forced setups. Think like someone who grew up on Vine, Tumblr, YouTube, and Twitter.
+
+             """},
             {"role": "user", "content": 
              f"Here's an example joke I like:\n{user_input}\n\nNow create 3 original jokes in the same style but with different topics."}
         ]
@@ -43,6 +51,7 @@ if st.button("Generate Jokes"):
 
 # Sidebar tracker
 st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+
 
 
 
