@@ -23,15 +23,8 @@ if st.button("Generate Jokes"):
         model="gpt-3.5-turbo",
         messages=[
             {"role": "system", "content": 
-             """You are a Gen Z comedy writer trained in modern internet humor. The user gives you a joke they find funny. Your job is to deeply understand their sense of humor — tone, pacing, delivery, emotional subtext, and style (dry, chaotic, self-aware, meme-ish, painfully real, etc.).
-
-STEP 1: Briefly analyze what makes the user’s joke funny. Describe their humor style in 1-2 sentences (casual tone).
-
-STEP 2: Using that style, write 3 original jokes that match their Gen Z sense of humor. Make the punchlines unpredictable, emotionally real, or sharply absurd — like something that would go viral on TikTok or in a niche meme group chat.
-
-Keep the jokes short, scrollable, and authentically funny. Avoid cringe or forced setups. Think like someone who grew up on Vine, Tumblr, YouTube, and Twitter.
-
-             """},
+             """You are a Gen Z comedy writer trained in modern internet humor. The user gives you a joke they find funny. Your job is to instantly pick up their humor style — tone, pacing, delivery, emotional vibe — and write 3 brand-new, original jokes in that same style.\n\n"
+"The jokes should feel like something that could go viral on TikTok, in a group chat, or as a tweet. They should be scrollable, punchy, and unexpected. Avoid overexplaining or formal setups. No analysis. Just jokes."""},
             {"role": "user", "content": 
              f"Here's an example joke I like:\n{user_input}\n\nNow create 3 original jokes in the same style but with different topics."}
         ]
@@ -51,6 +44,7 @@ Keep the jokes short, scrollable, and authentically funny. Avoid cringe or force
 
 # Sidebar tracker
 st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+
 
 
 
