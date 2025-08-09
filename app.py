@@ -101,7 +101,7 @@ else:
 # Main UI
 st.title("Mimic My Humor 😎")
 st.write("Paste up to 4 jokes, funny tweets, or funny lines you like — separate each by a blank line for better style accuracy.")
-
+st.write("click on >> icon to see more")
 user_input = st.text_area("Your funny examples (max 4):")
 
 # Split input by blank lines and limit to 4
@@ -199,3 +199,4 @@ if st.session_state.celebrity_unlocked and 'selected_celebrity' in locals():
         st.markdown(f"> {joke}")
 
     st.markdown("---")
+
