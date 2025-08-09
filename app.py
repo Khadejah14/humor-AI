@@ -10,21 +10,56 @@ client = OpenAI(api_key=st.secrets["OPENAI_KEY"])
 if 'joke_count' not in st.session_state:
     st.session_state.joke_count = 0
 
-# UI
+# Celebrity jokes database (example)
+celebrity_jokes = {
+    "Sam Altman": [
+        "Why did the AI refuse to date? It couldn't compute the chemistry.",
+        "Started an AI startup. Now my coffee is sentient and demands a raise."
+    ],
+    "Elon Musk": [
+        "I told my Tesla to self-drive me to Mars. It replied, 'Error: Destination too far.'",
+        "Mars is looking for a new mayor. Current residents are all... a bit spaced out."
+    ],
+    "Mark Zuckerberg": [
+        "I put 'likes' in my coffee instead of sugar. Now it just stalks my taste buds.",
+        "Every time I see a privacy policy, I feel like I need a lawyer... or a magician."
+    ],
+}
+
+# Sidebar: Celebrity Jokes
+st.sidebar.header("Celebrity Joke Styles")
+selected_celebrity = st.sidebar.radio("Pick a celebrity:", list(celebrity_jokes.keys()))
+
+st.sidebar.markdown(f"### {selected_celebrity}'s Style")
+
+for joke in celebrity_jokes[selected_celebrity]:
+    st.sidebar.markdown(f"> {joke}")
+
+# Button to share on Instagram (simplified)
+share_text = "\n\n".join(celebrity_jokes[selected_celebrity])
+encoded_text = urllib.parse.quote(share_text)
+
+# Instagram doesn't have a direct "share text" URL like Twitter, 
+# so you can link to Instagram DM or just instruct user to copy text.
+# Here, let's make a copy-to-clipboard button via st.text_area (since no native button)
+st.sidebar.markdown("---")
+st.sidebar.write("Copy the jokes below and share on Instagram:")
+
+st.sidebar.text_area("Copy jokes here:", value=share_text, height=100)
+
+# Main UI
 st.title("Mimic My Humor 😎")
 st.write(
-    "Paste up to 4 jokes, funny tweets, or any funny lines you find online — "
-    "separate each by a blank line. I’ll learn the style and generate more like them."
+    "Paste exactly 4 jokes, funny tweets, or funny lines you like — separate each by a blank line."
 )
-user_input = st.text_area("Your funny examples:")
 
-# Split input into separate jokes by blank lines
+user_input = st.text_area("Your 4 funny examples:")
+
+# Split input by blank lines
 jokes_list = [j.strip() for j in user_input.split('\n\n') if j.strip()]
 
-if len(jokes_list) == 0:
-    st.info("Please paste at least one joke or funny tweet to get started.")
-elif len(jokes_list) > 4:
-    st.warning(f"Please paste no more than 4 jokes or tweets. You provided: {len(jokes_list)}")
+if len(jokes_list) != 4:
+    st.warning(f"Please paste exactly 4 jokes or tweets. You provided: {len(jokes_list)}")
 else:
     if st.button("Generate Jokes"):
         st.session_state.joke_count += 1
@@ -88,4 +123,4 @@ else:
                 )
 
 # Sidebar tracker
-st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+st.sidebar.markdown(f"---\n**Jokes Generated:** {st.session_state.joke_count}")
