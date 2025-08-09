@@ -33,7 +33,7 @@ st.sidebar.header("Celebrity Joke Style")
 
 if not st.session_state.celebrity_unlocked:
     st.sidebar.write(
-        "👀 Unlock celebrity joke styles (like Sam Altman & Elon Musk) by sharing this app with a friend on Instagram!"
+        "👀 Unlock celebrity joke styles by sharing this app with a friend on Instagram!"
     )
 
     if st.sidebar.button("Share with a friend on Instagram"):
@@ -57,17 +57,20 @@ else:
 
 # Main UI
 st.title("Mimic My Humor 😎")
-st.write("Paste exactly 4 jokes, funny tweets, or funny lines you like — separate each by a blank line.")
+st.write("Paste up to 4 jokes, funny tweets, or funny lines you like — separate each by a blank line for better style accuracy.")
 
-user_input = st.text_area("Your 4 funny examples:")
+user_input = st.text_area("Your funny examples (max 4):")
 
-# Split input by blank lines
+# Split input by blank lines and limit to 4
 jokes_list = [j.strip() for j in user_input.split('\n\n') if j.strip()]
+if len(jokes_list) > 4:
+    st.warning(f"Please paste up to 4 jokes only. You provided: {len(jokes_list)}")
+    jokes_list = jokes_list[:4]  # Trim excess
 
-if len(jokes_list) != 4:
-    st.warning(f"Please paste exactly 4 jokes or tweets. You provided: {len(jokes_list)}")
-else:
-    if st.button("Generate Jokes"):
+if st.button("Generate Jokes"):
+    if len(jokes_list) == 0:
+        st.warning("Please paste at least one joke or funny line to generate new jokes.")
+    else:
         st.session_state.joke_count += 1
 
         combined_jokes = "\n\n".join(jokes_list)
