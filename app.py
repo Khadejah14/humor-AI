@@ -3,7 +3,7 @@ from openai import OpenAI
 import urllib.parse
 
 # Set up the app
-st.set_page_config(page_title="😂 AI Joke Generator")
+st.set_page_config(page_title="AI Joke Generator")
 client = OpenAI(api_key=st.secrets["OPENAI_KEY"])
 
 # Track joke count
@@ -35,17 +35,39 @@ if st.button("Generate Jokes"):
     # Parse and display each joke
     jokes = response.choices[0].message.content.split('\n')
     for j in jokes:
-        if j.strip():
-            st.success(j.strip())
-            tweet_url = f"https://twitter.com/intent/tweet?text={urllib.parse.quote(j.strip())}"
-            st.markdown(f"""
-                <a href="{tweet_url}" target="_blank">
-                <button style='background:#1DA1F2;color:white;border:none;padding:8px 12px;margin-top:5px;border-radius:6px;'>
-                Share on Twitter</button></a>
-            """, unsafe_allow_html=True)
+    if j.strip():
+        joke_text = j.strip()
+        tweet_url = f"https://twitter.com/intent/tweet?text={urllib.parse.quote(joke_text)}"
+
+        st.markdown(f"""
+            <div style="
+                background-color: #121212; 
+                color: white; 
+                border-radius: 15px; 
+                padding: 20px; 
+                margin-bottom: 15px; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.6);
+                font-size: 18px;
+                line-height: 1.4;
+            ">
+                {joke_text}
+                <div style="margin-top: 10px;">
+                    <a href="{tweet_url}" target="_blank" style="
+                        background-color: #1DA1F2;
+                        color: white;
+                        padding: 8px 16px;
+                        border-radius: 8px;
+                        text-decoration: none;
+                        font-weight: bold;
+                    ">Share on Twitter</a>
+                </div>
+            </div>
+        """, unsafe_allow_html=True)
+
 
 # Sidebar tracker
 st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+
 
 
 
