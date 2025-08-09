@@ -33,7 +33,7 @@ st.sidebar.header("Celebrity Joke Style")
 
 if not st.session_state.celebrity_unlocked:
     st.sidebar.write(
-        "👀 Unlock celebrity joke styles by sharing this app with a friend on Instagram!"
+        "👀 Unlock celebrity joke styles (like Sam Altman & Elon Musk) by sharing this app with a friend on Instagram!"
     )
 
     if st.sidebar.button("Share with a friend on Instagram"):
@@ -130,3 +130,4 @@ else:
 
 # Sidebar tracker
 st.sidebar.markdown(f"---\n**Jokes Generated:** {st.session_state.joke_count}")
+
