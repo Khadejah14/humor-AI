@@ -35,7 +35,7 @@ if st.button("Generate Jokes"):
     # Parse and display each joke
     jokes = response.choices[0].message.content.split('\n')
     for j in jokes:
-    if j.strip():
+      if j.strip():
         joke_text = j.strip()
         tweet_url = f"https://twitter.com/intent/tweet?text={urllib.parse.quote(joke_text)}"
 
@@ -64,9 +64,9 @@ if st.button("Generate Jokes"):
             </div>
         """, unsafe_allow_html=True)
 
-
 # Sidebar tracker
 st.sidebar.markdown(f"**Jokes Generated:** {st.session_state.joke_count}")
+
 
 
 
