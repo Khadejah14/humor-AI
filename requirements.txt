@@ -1,3 +1,4 @@
 streamlit
 openai
-posthog
+requests
+beautifulsoup4
